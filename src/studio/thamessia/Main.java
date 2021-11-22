@@ -73,7 +73,7 @@ public class Main {
                                 IP, (short) port, NextState.LOGIN);
                         handshakePacket.sendPacket(dataOutputStream);
 
-                        Thread.sleep(200);
+                        Thread.sleep(250);
 
                         LoginStart loginStart = new LoginStart("404." + new Random().nextInt(5000) + "");
                         loginStart.sendPacket(dataOutputStream);
@@ -84,7 +84,7 @@ public class Main {
                         com.github.thamessia.alphabot.GameStateOutput gameStateOutput = new com.github.thamessia.alphabot.GameStateOutput(dataOutputStream);
 
                         // Send the chat message packet
-                        //gameStateOutput.sendMessage((int) protocol, setCompression.getThreshold(), "/register nigger nigger");
+                        // gameStateOutput.sendMessage((int) protocol, setCompression.getThreshold(), "/register nigger nigger");
                         gameStateOutput.sendMessage((int) protocol, setCompression.getThreshold(), message);
 
                         //LoginSuccess loginSuccess = new LoginSuccess();
@@ -114,7 +114,7 @@ public class Main {
 
                         System.out.println("Sending bots...");
 
-                        Thread.sleep(500);
+                        Thread.sleep(350);
                         socket.close();
                     } catch (SocketException e) {
                         System.err.print("");
@@ -134,12 +134,7 @@ public class Main {
 
         for (Thread thread : bots) {
             thread.start();
-            thread.sleep(250);
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            Thread.sleep(10);
         }
     }
 
@@ -162,6 +157,8 @@ public class Main {
                 System.err.println("[DivineBooter] Server is offline");
             } catch (NullPointerException e) {
                 System.err.print("");
+            } catch (SocketException e) {
+
             }
         }
     }
