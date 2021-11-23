@@ -47,7 +47,7 @@ public class Main {
         for(int j = 0; j < 3000; j++) {
 
             bots.add(new Thread(() -> {
-                Socket socket = new Socket(proxy);
+                Socket socket = new Socket();
                 try {
                     try {
                         socket.setTcpNoDelay(true);
@@ -158,7 +158,7 @@ public class Main {
             } catch (NullPointerException e) {
                 System.err.print("");
             } catch (SocketException e) {
-
+                System.err.println("[DivineError] Server is lagging too much, bots can't join!");
             }
         }
     }
