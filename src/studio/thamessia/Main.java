@@ -7,6 +7,8 @@ import studio.thamessia.Packets.Handshake.HandshakePacket;
 import studio.thamessia.Packets.Handshake.NextState;
 import studio.thamessia.Packets.Login.LoginStart;
 import studio.thamessia.Packets.Login.SetCompression;
+import studio.thamessia.Packets.Serverbound.InteractEntity;
+import studio.thamessia.Packets.Serverbound.Type;
 import studio.thamessia.Packets.Status.StatusManager;
 
 import java.io.*;
@@ -47,7 +49,7 @@ public class Main {
         for(int j = 0; j < 3000; j++) {
 
             bots.add(new Thread(() -> {
-                Socket socket = new Socket();
+                Socket socket = new Socket(proxy);
                 try {
                     try {
                         socket.setTcpNoDelay(true);
@@ -79,6 +81,9 @@ public class Main {
                         loginStart.sendPacket(dataOutputStream);
 
                         SetCompression setCompression = new SetCompression().readPacket(dataInputStream);
+
+                        InteractEntity interactEntity = new InteractEntity(0, Type.ATTACK,false);
+                        interactEntity.sendPacket(dataOutputStream);
 
                         // Game state
                         com.github.thamessia.alphabot.GameStateOutput gameStateOutput = new com.github.thamessia.alphabot.GameStateOutput(dataOutputStream);
