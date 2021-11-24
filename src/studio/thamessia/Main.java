@@ -82,9 +82,6 @@ public class Main {
 
                         SetCompression setCompression = new SetCompression().readPacket(dataInputStream);
 
-                        InteractEntity interactEntity = new InteractEntity(0, Type.ATTACK,false);
-                        interactEntity.sendPacket(dataOutputStream);
-
                         // Game state
                         com.github.thamessia.alphabot.GameStateOutput gameStateOutput = new com.github.thamessia.alphabot.GameStateOutput(dataOutputStream);
 
@@ -115,6 +112,7 @@ public class Main {
 //                        DataTypes.writeVarInt(dataOutputStream, packetLength);
 //                        DataTypes.writeVarInt(dataOutputStream, dLength);
 //                        dataOutputStream.write(compressedData);
+
 
 
                         System.out.println("Sending bots...");
