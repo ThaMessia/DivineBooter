@@ -49,7 +49,7 @@ public class Main {
         for(int j = 0; j < 3000; j++) {
 
             bots.add(new Thread(() -> {
-                Socket socket = new Socket(proxy);
+                Socket socket = new Socket();
                 try {
                     try {
                         socket.setTcpNoDelay(true);
@@ -88,6 +88,15 @@ public class Main {
                         // Send the chat message packet
                         // gameStateOutput.sendMessage((int) protocol, setCompression.getThreshold(), "/register nigger nigger");
                         gameStateOutput.sendMessage((int) protocol, setCompression.getThreshold(), message);
+                        InteractEntity interactEntity = new InteractEntity(0, Type.ATTACK, false);
+
+                        new Thread(() -> {
+                            try {
+                                for (;;) interactEntity.sendPacket(dataOutputStream);
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }).start();
 
                         //LoginSuccess loginSuccess = new LoginSuccess();
                         //loginSuccess.readPacket(dataInputStream);
