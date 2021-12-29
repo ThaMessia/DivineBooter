@@ -90,13 +90,13 @@ public class Main {
                         gameStateOutput.sendMessage((int) protocol, setCompression.getThreshold(), message);
                         InteractEntity interactEntity = new InteractEntity(0, Type.ATTACK, false);
 
-                        new Thread(() -> {
+                        /*new Thread(() -> {
                             try {
                                 for (;;) interactEntity.sendPacket(dataOutputStream);
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
-                        }).start();
+                        }).start();*/
 
                         //LoginSuccess loginSuccess = new LoginSuccess();
                         //loginSuccess.readPacket(dataInputStream);
@@ -150,6 +150,28 @@ public class Main {
         }
     }
 
+    public static void checkProxy(String fileName) throws IOException {
+        String fileStringManager;
+
+        File file = new File(fileName);
+        StringBuilder stringBuilder = new StringBuilder();
+
+        try {
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
+        } catch (FileNotFoundException e) {
+            System.err.println("File not found.");
+        }
+
+        for (int i = 0; (fileStringManager = bufferedReader.readLine()) != null; i++) {
+            stringBuilder.append(fileStringManager);
+            InetAddress address = InetAddress.getByName(fileStringManager);
+
+            if (!address.isReachable(5000)) System.out.println("PROXY: " + fileStringManager + " is working");
+            else System.out.println("PROXY: " + fileStringManager + " is not working.");
+        }
+
+    }
+
     public static void main(String[] args) throws IOException {
         String select;
 
@@ -161,6 +183,14 @@ public class Main {
                 select = bufferedReader.readLine();
 
                 if (select.equalsIgnoreCase("attack")) { executeAttack(); }
+                else if (select.equalsIgnoreCase("proxychecker")) {
+                    String fileName;
+
+                    System.out.print("Type proxies' file name: ");
+                    fileName = bufferedReader.readLine();
+
+                    checkProxy(fileName);
+                }
                 else { System.err.println("Unknown command!"); }
             } catch (InputMismatchException | InterruptedException | ParseException e) {
                 System.err.println("You have to insert a string for the IP and");
