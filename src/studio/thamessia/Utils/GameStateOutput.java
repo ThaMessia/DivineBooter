@@ -1,7 +1,6 @@
-package com.github.thamessia.alphabot;
+package studio.thamessia.Utils;
 
-import com.github.thamessia.alphabot.packets.play.ChatMessagePacket;
-import org.json.simple.JSONObject;
+import studio.thamessia.Packets.Play.ChatMessagePacket;
 
 import java.io.DataOutputStream;
 
@@ -13,7 +12,7 @@ public class GameStateOutput {
     }
 
     public void sendMessage(int p_v, int th, String message) {
-        com.github.thamessia.alphabot.packets.play.ChatMessagePacket packetPlayOutChatMessage = new ChatMessagePacket(
+        ChatMessagePacket packetPlayOutChatMessage = new ChatMessagePacket(
                 p_v >= 47 && p_v < 80 ? 0x01 : p_v >= 80 && p_v < 318 ? 0x02 : p_v >= 318 && p_v < 336 ? 0x03 : p_v >= 336 && p_v < 343 ? 0x02 : p_v >= 343 && p_v < 464 ? 0x01 : 0x03,
                 th,
                 message

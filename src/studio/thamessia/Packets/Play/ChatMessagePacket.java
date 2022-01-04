@@ -1,4 +1,4 @@
-package com.github.thamessia.alphabot.packets.play;
+package studio.thamessia.Packets.Play;
 
 
 import studio.thamessia.Packets.Packet;

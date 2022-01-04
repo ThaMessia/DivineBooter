@@ -10,6 +10,7 @@ import studio.thamessia.Packets.Login.SetCompression;
 import studio.thamessia.Packets.Serverbound.InteractEntity;
 import studio.thamessia.Packets.Serverbound.Type;
 import studio.thamessia.Packets.Status.StatusManager;
+import studio.thamessia.Utils.GameStateOutput;
 
 import java.io.*;
 import java.net.*;
@@ -49,7 +50,7 @@ public class Main {
         for(int j = 0; j < 3000; j++) {
 
             bots.add(new Thread(() -> {
-                Socket socket = new Socket();
+                Socket socket = new Socket(); //just type "proxy" in socket's constructor parameters to make bots join proxied.
                 try {
                     try {
                         socket.setTcpNoDelay(true);
@@ -83,7 +84,7 @@ public class Main {
                         SetCompression setCompression = new SetCompression().readPacket(dataInputStream);
 
                         // Game state
-                        com.github.thamessia.alphabot.GameStateOutput gameStateOutput = new com.github.thamessia.alphabot.GameStateOutput(dataOutputStream);
+                        GameStateOutput gameStateOutput = new GameStateOutput(dataOutputStream);
 
                         // Send the chat message packet
                         // gameStateOutput.sendMessage((int) protocol, setCompression.getThreshold(), "/register nigger nigger");
@@ -166,7 +167,7 @@ public class Main {
             stringBuilder.append(fileStringManager);
             InetAddress address = InetAddress.getByName(fileStringManager);
 
-            if (!address.isReachable(5000)) System.out.println("PROXY: " + fileStringManager + " is working");
+            if (address.isReachable(5000)) System.out.println("PROXY: " + fileStringManager + " is working");
             else System.out.println("PROXY: " + fileStringManager + " is not working.");
         }
 
@@ -190,8 +191,12 @@ public class Main {
                     fileName = bufferedReader.readLine();
 
                     checkProxy(fileName);
+                } else if (select.equals("help")) {
+                    System.out.println("Help: displays this page.");
+                    System.out.println("Proxychecker: checks if proxies (without port because it checks the host) are working.");
+                    System.out.println("Attack: attacks.");
                 }
-                else { System.err.println("Unknown command!"); }
+                else { System.err.println("Unknown command! Type \"help\" fpor a list of commands."); }
             } catch (InputMismatchException | InterruptedException | ParseException e) {
                 System.err.println("You have to insert a string for the IP and");
                 System.err.println("an integer number for the port!");
