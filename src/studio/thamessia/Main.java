@@ -237,8 +237,8 @@ public class Main {
                     System.out.println("Port: " + port);
                     //System.out.println("Version: " + version);
                     System.out.println("Protocol: " + protocol);
-                    System.out.println("Max players: " + maxPlayers);
                     System.out.println("Online players: " + onlinePlayers + '\n');
+                    System.out.println("Max players: " + maxPlayers);
                     //System.out.println("Players' names (note that this will be empty if server doesn't have this feature): " + samplePlayers);
 
                 }
