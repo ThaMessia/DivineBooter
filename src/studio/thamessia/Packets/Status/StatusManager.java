@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.net.ConnectException;
 import java.net.InetSocketAddress;
 import java.net.Socket;
+import java.net.UnknownHostException;
 
 public class StatusManager {
 
@@ -46,6 +47,8 @@ public class StatusManager {
             return response.toString();
         } catch (ConnectException e) {
             System.err.println("[DivineBooter] Server is offline.");
+        } catch (UnknownHostException e) {
+            System.err.println("[DivineBooter] Server doesn't exist.");
         } catch (IOException e) {
             e.printStackTrace();
         } catch (NullPointerException e) {
