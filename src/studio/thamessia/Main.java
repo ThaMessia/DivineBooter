@@ -159,16 +159,15 @@ public class Main {
 
         try {
             BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
+            for (int i = 0; (fileStringManager = bufferedReader.readLine()) != null; i++) {
+                stringBuilder.append(fileStringManager);
+                InetAddress address = InetAddress.getByName(fileStringManager);
+
+                if (address.isReachable(5000)) System.out.println("PROXY: " + fileStringManager + " is working");
+                else System.out.println("PROXY: " + fileStringManager + " is not working.");
+            }
         } catch (FileNotFoundException e) {
             System.err.println("File not found.");
-        }
-
-        for (int i = 0; (fileStringManager = bufferedReader.readLine()) != null; i++) {
-            stringBuilder.append(fileStringManager);
-            InetAddress address = InetAddress.getByName(fileStringManager);
-
-            if (address.isReachable(5000)) System.out.println("PROXY: " + fileStringManager + " is working");
-            else System.out.println("PROXY: " + fileStringManager + " is not working.");
         }
 
     }
