@@ -3,6 +3,9 @@ package studio.thamessia;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import studio.thamessia.Bypass.ChatMode;
+import studio.thamessia.Bypass.ClientSettingsBypass;
+import studio.thamessia.Bypass.MainHand;
 import studio.thamessia.Packets.Handshake.HandshakePacket;
 import studio.thamessia.Packets.Handshake.NextState;
 import studio.thamessia.Packets.Login.LoginStart;
@@ -81,14 +84,17 @@ public class Main {
                         LoginStart loginStart = new LoginStart("404." + new Random().nextInt(5000) + "");
                         loginStart.sendPacket(dataOutputStream);
 
+                        //ClientSettingsBypass clientSettingsBypass = new ClientSettingsBypass("it_IT", (byte) 1, ChatMode.HIDDEN, false, (byte) 0x08, MainHand.RIGHT, true, false);
+                        //clientSettingsBypass.sendPacket(dataOutputStream);
+
                         SetCompression setCompression = new SetCompression().readPacket(dataInputStream);
 
-                        // Game state
-                        GameStateOutput gameStateOutput = new GameStateOutput(dataOutputStream);
+                        ClientSettingsBypass clientSettingsBypass = new ClientSettingsBypass("it_IT", (byte) 1, ChatMode.HIDDEN, false, (byte) 0x08, MainHand.RIGHT, true, false);
+                        clientSettingsBypass.sendPacket(dataOutputStream);
 
-                        // Send the chat message packet
-                        // gameStateOutput.sendMessage((int) protocol, setCompression.getThreshold(), "/register nigger nigger");
+                        GameStateOutput gameStateOutput = new GameStateOutput(dataOutputStream);
                         gameStateOutput.sendMessage((int) protocol, setCompression.getThreshold(), message);
+
                         InteractEntity interactEntity = new InteractEntity(0, Type.ATTACK, false);
 
                         /*new Thread(() -> {
