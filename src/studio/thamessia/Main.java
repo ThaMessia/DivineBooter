@@ -13,7 +13,10 @@ import studio.thamessia.Packets.Login.SetCompression;
 import studio.thamessia.Packets.Serverbound.InteractEntity;
 import studio.thamessia.Packets.Serverbound.Type;
 import studio.thamessia.Packets.Status.StatusManager;
+import studio.thamessia.Packets.Status.StatusRequestPacket;
+import studio.thamessia.Utils.DataTypes;
 import studio.thamessia.Utils.GameStateOutput;
+import studio.thamessia.Utils.PacketSetCompression;
 
 import java.io.*;
 import java.net.*;
@@ -225,6 +228,15 @@ public class Main {
                     JSONParser jsonParser = new JSONParser();
                     JSONObject jsonObject = (JSONObject) jsonParser.parse(serverStatus);
 
+                    Socket socket = new Socket();
+                    InetSocketAddress inetSocketAddress = new InetSocketAddress(host, port);
+                    socket.connect(inetSocketAddress);
+
+                    DataOutputStream dataOutputStream = new DataOutputStream(socket.getOutputStream());
+                    DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());
+
+                    PacketSetCompression packetSetCompression = new PacketSetCompression();
+
                     JSONObject version = (JSONObject) jsonObject.get("version");
                     long protocol = (long) version.get("protocol");
 
@@ -237,8 +249,22 @@ public class Main {
                     System.out.println("Port: " + port);
                     //System.out.println("Version: " + version);
                     System.out.println("Protocol: " + protocol);
-                    System.out.println("Online players: " + onlinePlayers + '\n');
+                    System.out.println("Online players: " + onlinePlayers);
                     System.out.println("Max players: " + maxPlayers);
+
+                    HandshakePacket packetHandshake = new HandshakePacket((int) protocol, host, port, NextState.LOGIN);
+                    packetHandshake.sendPacket(dataOutputStream);
+
+                    Thread.sleep(250);
+
+                    LoginStart packetLoginStart = new LoginStart("moonl1ght01");
+                    packetLoginStart.sendPacket(dataOutputStream);
+
+                    int id = DataTypes.readVarInt(dataInputStream);
+
+                    System.out.print("Premium: ");
+                    System.out.println(id == 0x03 ? "No." : "Yes.");
+                    System.out.println("");
                     //System.out.println("Players' names (note that this will be empty if server doesn't have this feature): " + samplePlayers);
 
                 }
