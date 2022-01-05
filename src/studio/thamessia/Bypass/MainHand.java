@@ -6,6 +6,7 @@ public enum MainHand {
     LEFT(0),
     RIGHT(1);
 
+
     public final int value;
 
     MainHand(int value) {

@@ -6,6 +6,7 @@ import org.json.simple.parser.ParseException;
 import studio.thamessia.Bypass.ChatMode;
 import studio.thamessia.Bypass.ClientSettingsBypass;
 import studio.thamessia.Bypass.MainHand;
+import studio.thamessia.Bypass.PlayerRotationBypass;
 import studio.thamessia.Packets.Handshake.HandshakePacket;
 import studio.thamessia.Packets.Handshake.NextState;
 import studio.thamessia.Packets.Login.LoginStart;
@@ -95,6 +96,9 @@ public class Main {
 
                             ClientSettingsBypass clientSettingsBypass = new ClientSettingsBypass("it_IT", (byte) 1, ChatMode.HIDDEN, false, (byte) 0x08, MainHand.RIGHT, true, false);
                             clientSettingsBypass.sendPacket(dataOutputStream);
+
+                            PlayerRotationBypass playerRotationBypass = new PlayerRotationBypass(15, 50, true);
+                            playerRotationBypass.sendPacket(dataOutputStream);
 
                             GameStateOutput gameStateOutput = new GameStateOutput(dataOutputStream);
                             gameStateOutput.sendMessage((int) protocol, setCompression.getThreshold(), message);
