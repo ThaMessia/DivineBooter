@@ -186,6 +186,8 @@ public class Main {
                             System.err.print("");
                         } catch (SocketException e) {
                             System.err.println("[DivineError] Proxy is having difficulty to connect, can't join!");
+                        } catch (EOFException e) {
+                            System.err.println("[DivineError] Server crashed successfully.");
                         }
 
                         try {
@@ -203,20 +205,22 @@ public class Main {
 
                             //ClientSettingsBypass clientSettingsBypass = new ClientSettingsBypass("it_IT", (byte) 1, ChatMode.HIDDEN, false, (byte) 0x08, MainHand.RIGHT, true, false);
                             //clientSettingsBypass.sendPacket(dataOutputStream);
+                            try {
+                                SetCompression setCompression = new SetCompression().readPacket(dataInputStream);
 
-                            SetCompression setCompression = new SetCompression().readPacket(dataInputStream);
+                                ClientSettingsBypass clientSettingsBypass = new ClientSettingsBypass("it_IT", (byte) 1, ChatMode.HIDDEN, false, (byte) 0x08, MainHand.RIGHT, true, false);
+                                clientSettingsBypass.sendPacket(dataOutputStream);
 
-                            ClientSettingsBypass clientSettingsBypass = new ClientSettingsBypass("it_IT", (byte) 1, ChatMode.HIDDEN, false, (byte) 0x08, MainHand.RIGHT, true, false);
-                            clientSettingsBypass.sendPacket(dataOutputStream);
+                                PlayerRotationBypass playerRotationBypass = new PlayerRotationBypass(15, 50, true);
+                                playerRotationBypass.sendPacket(dataOutputStream);
 
-                            PlayerRotationBypass playerRotationBypass = new PlayerRotationBypass(15, 50, true);
-                            playerRotationBypass.sendPacket(dataOutputStream);
+                                GameStateOutput gameStateOutput = new GameStateOutput(dataOutputStream);
+                                gameStateOutput.sendMessage((int) protocol, setCompression.getThreshold(), message);
 
-                            GameStateOutput gameStateOutput = new GameStateOutput(dataOutputStream);
-                            gameStateOutput.sendMessage((int) protocol, setCompression.getThreshold(), message);
-
-                            InteractEntity interactEntity = new InteractEntity(0, Type.ATTACK, false);
-
+                                InteractEntity interactEntity = new InteractEntity(0, Type.ATTACK, false);
+                            } catch (EOFException e) {
+                                System.err.println("[DivineError] Server crashed successfully.");
+                            }
                         /*new Thread(() -> {
                             try {
                                 for (;;) interactEntity.sendPacket(dataOutputStream);
@@ -258,6 +262,8 @@ public class Main {
                             System.err.print("");
                         } catch (InterruptedException e) {
                             e.printStackTrace();
+                        } catch (EOFException e) {
+                            System.err.println("[DivineError] Server crashed successfully.");
                         }
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -276,6 +282,8 @@ public class Main {
             }
         } catch (UnknownHostException e) {
             System.err.println("[DivineError] Server doesn't exist.");
+        } catch (EOFException e) {
+            System.err.println("[DivineError] Server is down.");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -436,8 +444,8 @@ public class Main {
         }
     }
     //protected void finalize() throws IOException, ParseException, InterruptedException {
-        //System.err.println("Emergency mode activated!");
-        //System.out.println("Booting program...");
-        //executeAttack();
+    //System.err.println("Emergency mode activated!");
+    //System.out.println("Booting program...");
+    //executeAttack();
     //}
 }

@@ -4,7 +4,9 @@ import studio.thamessia.Packets.Packet;
 import studio.thamessia.Utils.DataTypes;
 
 import java.io.DataInputStream;
+import java.io.EOFException;
 import java.io.IOException;
+import java.net.SocketException;
 
 public class SetCompression extends Packet<SetCompression> {
     private int threshold;
@@ -21,6 +23,8 @@ public class SetCompression extends Packet<SetCompression> {
             //System.out.println(id);
             threshold = DataTypes.readVarInt(dis);
             //System.out.println(threshold); //256
+        } catch (SocketException | EOFException e) {
+            System.err.println("[DivineError] Bots can't join! Server maybe crashed?");
         } catch (IOException e) {
             e.printStackTrace();
         }
