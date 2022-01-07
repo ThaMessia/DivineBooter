@@ -63,7 +63,24 @@ public class Main {
             //System.out.println(protocol);
 
             InetSocketAddress address = new InetSocketAddress(IP, port);
-            Proxy proxy = new Proxy(Proxy.Type.SOCKS, new InetSocketAddress("188.166.104.152", 39088));
+
+            File proxiesFile = new File("proxiesFile.txt");
+            if (!proxiesFile.exists()) System.err.println("Could not find \"proxiesFile.txt\". Exiting program..."); System.exit(0);
+
+            BufferedReader fileReader = new BufferedReader(new FileReader(proxiesFile));
+            String fileStringManager;
+            ArrayList<String> proxiesList = new ArrayList<>();
+
+            fileStringManager = fileReader.readLine();
+            proxiesList.add(fileStringManager);
+
+            String[] complexHost = proxiesList.get(0).split(":");
+            String simpleHost = complexHost[0];
+            int simplePort = Integer.parseInt(complexHost[1]);
+
+            if (proxiesList.isEmpty()) System.err.println("No proxy found in the file! Exiting..."); System.exit(0);
+
+            Proxy proxy = new Proxy(Proxy.Type.SOCKS, new InetSocketAddress(simpleHost, simplePort));
 
             List<Thread> bots = new ArrayList<>();
 
