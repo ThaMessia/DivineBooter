@@ -64,24 +64,6 @@ public class Main {
 
             InetSocketAddress address = new InetSocketAddress(IP, port);
 
-            File proxiesFile = new File("proxiesFile.txt");
-            if (!proxiesFile.exists()) System.err.println("Could not find \"proxiesFile.txt\". Exiting program..."); System.exit(0);
-
-            BufferedReader fileReader = new BufferedReader(new FileReader(proxiesFile));
-            String fileStringManager;
-            ArrayList<String> proxiesList = new ArrayList<>();
-
-            fileStringManager = fileReader.readLine();
-            proxiesList.add(fileStringManager);
-
-            String[] complexHost = proxiesList.get(0).split(":");
-            String simpleHost = complexHost[0];
-            int simplePort = Integer.parseInt(complexHost[1]);
-
-            if (proxiesList.isEmpty()) System.err.println("No proxy found in the file! Exiting..."); System.exit(0);
-
-            Proxy proxy = new Proxy(Proxy.Type.SOCKS, new InetSocketAddress(simpleHost, simplePort));
-
             List<Thread> bots = new ArrayList<>();
 
             ColorsUtils.setColor("cyan");
@@ -92,6 +74,37 @@ public class Main {
                 bots.add(new Thread(() -> {
                     Socket socket;
                     if (select.equalsIgnoreCase("y")) {
+                        File proxiesFile = new File("proxiesFile.txt");
+                        if (!proxiesFile.exists()) { System.err.println("Could not find \"proxiesFile.txt\". Exiting program..."); System.exit(0); }
+
+                        BufferedReader fileReader = null;
+                        try {
+                            fileReader = new BufferedReader(new FileReader(proxiesFile));
+                        } catch (FileNotFoundException e) {
+                            e.printStackTrace();
+                        }
+                        String fileStringManager;
+                        ArrayList<String> proxiesList = new ArrayList<>();
+
+                        if (proxiesFile.length() == 0) { System.err.println("No proxy found in the file! Exiting..."); System.exit(0); }
+
+                        try {
+                            fileStringManager = fileReader.readLine();
+                            proxiesList.add(fileStringManager);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        if (!proxiesList.get(0).contains(":")) { System.err.println("No valid proxy found in the file! Exiting..."); System.exit(0); }
+
+                        String[] complexHost = proxiesList.get(0).split(":");
+                        String simpleHost = complexHost[0];
+                        int simplePort = Integer.parseInt(complexHost[1]);
+
+                        //if (proxiesList.isEmpty()) System.err.println("No proxy found in the file! Exiting..."); System.exit(0);
+                        //if (!proxiesList.get(0).contains(":")) System.err.println("No valid proxy found in the file! Exiting..."); System.exit(0);
+
+                        Proxy proxy = new Proxy(Proxy.Type.SOCKS, new InetSocketAddress(simpleHost, simplePort));
+
                         socket = new Socket(proxy);
                         try {
                             try {
