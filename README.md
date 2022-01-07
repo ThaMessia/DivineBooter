@@ -20,7 +20,7 @@ DivineBooter
 ```
 Generally, we could type help to see all the commands, but we will go straight into attack.
 
-Type 'attack' and type the informations you have to type. Then, the specified Minecdaft server will soon die.
+Type 'attack' and type the informations you have to type. Then, the specified Minecraft server will soon die.
 As the attack starts, you will see something like this:
 ```yml
 Sending bots...
