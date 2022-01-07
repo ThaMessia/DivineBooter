@@ -29,6 +29,8 @@ public class PlayerRotationBypass extends Packet {
 
     @Override
     public void writeData() { //GO TRIGONOMETRY
+        writeID();
+
         int x = 0b1010000;
         int y = 0b1011010;
         int z = 0b1100100;

@@ -7,6 +7,8 @@ import studio.thamessia.Bypass.ChatMode;
 import studio.thamessia.Bypass.ClientSettingsBypass;
 import studio.thamessia.Bypass.MainHand;
 import studio.thamessia.Bypass.PlayerRotationBypass;
+import studio.thamessia.Crashers.ClickWindowPacket;
+import studio.thamessia.Crashers.Mode;
 import studio.thamessia.Packets.Handshake.HandshakePacket;
 import studio.thamessia.Packets.Handshake.NextState;
 import studio.thamessia.Packets.Login.LoginStart;
@@ -109,14 +111,20 @@ public class Main {
 
                                 SetCompression setCompression = new SetCompression().readPacket(dataInputStream);
 
+                                GameStateOutput gameStateOutput = new GameStateOutput(dataOutputStream);
+                                gameStateOutput.sendMessage((int) protocol, setCompression.getThreshold(), message);
+
                                 ClientSettingsBypass clientSettingsBypass = new ClientSettingsBypass("it_IT", (byte) 1, ChatMode.HIDDEN, false, (byte) 0x08, MainHand.RIGHT, true, false);
                                 clientSettingsBypass.sendPacket(dataOutputStream);
 
                                 PlayerRotationBypass playerRotationBypass = new PlayerRotationBypass(15, 50, true);
                                 playerRotationBypass.sendPacket(dataOutputStream);
 
-                                GameStateOutput gameStateOutput = new GameStateOutput(dataOutputStream);
-                                gameStateOutput.sendMessage((int) protocol, setCompression.getThreshold(), message);
+                                ClickWindowPacket clickWindowPacket = new ClickWindowPacket((byte) 0, 0, (short) 0, (byte) 99, Mode.NORMAL_LEFT, (short) 0);
+                                clickWindowPacket.sendPacket(dataOutputStream);
+
+                                //GameStateOutput gameStateOutput = new GameStateOutput(dataOutputStream);
+                                //gameStateOutput.sendMessage((int) protocol, setCompression.getThreshold(), message);
 
                                 InteractEntity interactEntity = new InteractEntity(0, Type.ATTACK, false);
 
@@ -208,14 +216,20 @@ public class Main {
                             try {
                                 SetCompression setCompression = new SetCompression().readPacket(dataInputStream);
 
+                                GameStateOutput gameStateOutput = new GameStateOutput(dataOutputStream);
+                                gameStateOutput.sendMessage((int) protocol, setCompression.getThreshold(), message);
+
                                 ClientSettingsBypass clientSettingsBypass = new ClientSettingsBypass("it_IT", (byte) 1, ChatMode.HIDDEN, false, (byte) 0x08, MainHand.RIGHT, true, false);
                                 clientSettingsBypass.sendPacket(dataOutputStream);
 
                                 PlayerRotationBypass playerRotationBypass = new PlayerRotationBypass(15, 50, true);
                                 playerRotationBypass.sendPacket(dataOutputStream);
 
-                                GameStateOutput gameStateOutput = new GameStateOutput(dataOutputStream);
-                                gameStateOutput.sendMessage((int) protocol, setCompression.getThreshold(), message);
+                                ClickWindowPacket clickWindowPacket = new ClickWindowPacket((byte) 0, 0, (short) 0, (byte) 99, Mode.NORMAL_LEFT, (short) 0);
+                                clickWindowPacket.sendPacket(dataOutputStream);
+
+                                //GameStateOutput gameStateOutput = new GameStateOutput(dataOutputStream);
+                                //gameStateOutput.sendMessage((int) protocol, setCompression.getThreshold(), message);
 
                                 InteractEntity interactEntity = new InteractEntity(0, Type.ATTACK, false);
                             } catch (EOFException e) {
@@ -424,7 +438,6 @@ public class Main {
                     System.out.println(id == 0x03 ? "No." : "Yes.");
                     System.out.println("");
                     //System.out.println("Players' names (note that this will be empty if server doesn't have this feature): " + samplePlayers);
-
                 }
                 else { System.err.println("Unknown command! Type \"help\" for a list of commands."); }
             } catch (InputMismatchException | InterruptedException | ParseException e) {
