@@ -16,7 +16,6 @@ import studio.thamessia.Packets.Login.SetCompression;
 import studio.thamessia.Packets.Serverbound.InteractEntity;
 import studio.thamessia.Packets.Serverbound.Type;
 import studio.thamessia.Packets.Status.StatusManager;
-import studio.thamessia.Packets.Status.StatusRequestPacket;
 import studio.thamessia.Utils.ColorsUtils;
 import studio.thamessia.Utils.DataTypes;
 import studio.thamessia.Utils.GameStateOutput;
@@ -264,7 +263,10 @@ public class Main {
                                 InteractEntity interactEntity = new InteractEntity(0, Type.ATTACK, false);
                             } catch (EOFException e) {
                                 System.err.println("[DivineError] Server crashed successfully.");
-                            }
+                            } catch (SocketException e) {
+			    	System.err.println("[DivineError] Trying to bypass whitelist...");
+			    }
+			   
                         /*new Thread(() -> {
                             try {
                                 for (;;) interactEntity.sendPacket(dataOutputStream);
