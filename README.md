@@ -25,7 +25,15 @@ As the attack starts, you will see something like this:
 ```yml
 Sending bots...
 ```
-PRO TIP: If you want the specified Minecraft server to crash instantly, do not use proxies, as they are very slow.
+How to use proxies? Using proxies is as easy as seducing a 12 year old guy: if you have big and sexy tits you get him.
+Now, to use proxies you must type "y" when in the attack section the program asks you this:
+
+```css
+Use proxies? (Y/n):
+```
+In order to actually use proxies you have to create a file called "proxiesFile.txt" and put ONE proxy in. And then there you go, you use your proxy.
+
+PRO TIP: If you want the specified Minecraft server to crash instantly, do not use proxies, as they are of course slower than your IPs. Use proxies only if you want anonymity! 
 
 Run this on a botnet or a VPS and you have your secure Minecraft hacking environment!
 
