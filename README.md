@@ -37,6 +37,7 @@ PRO TIP: If you want the specified Minecraft server to crash instantly, do not u
 
 Run this on a botnet or a VPS and you have your secure Minecraft hacking environment!
 
+NOTE: This works for Vanilla. Might it work even for Spigot or Bukkit? **Rarely**.
 
 ```diff
 - Made with love and pizza by ThaMessia
