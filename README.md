@@ -1,5 +1,10 @@
 # DivineBooter
 
+NOTE: **This works only for Vanilla. It might work even for Bukkit/Spigot, but I do not assure it.
+Why does it work only for Vanilla? Because the packets that DivineBooter sends are too fast and Bukkit/Spigot blocks them.
+Could I create one for Bukkit/Spigot? Yes. Will I do it? *No.*** 
+
+
 DivineBooter is a special type of tool that attacks Minecraft servers sending packets and bots.
 Why should you choose DivineBooter over other booters?
 ```yml
@@ -36,7 +41,6 @@ In order to actually use proxies you have to create a file called "proxiesFile.t
 PRO TIP: If you want the specified Minecraft server to crash instantly, do not use proxies, as they are of course slower than your IPs. Use proxies only if you want anonymity! 
 
 Run this on a botnet or a VPS and you have your secure Minecraft hacking environment!
-
 
 ```diff
 - Made with love and pizza by ThaMessia
