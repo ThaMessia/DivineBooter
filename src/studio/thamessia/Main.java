@@ -433,7 +433,14 @@ public class Main {
                     System.out.print("Numerical IP: ");
                     ColorsUtils.setColor("yellow");
                     InetSocketAddress inetSocketAddress1 = new InetSocketAddress(host, port);
-                    System.out.println(inetSocketAddress1.getAddress());
+
+                    if (inetSocketAddress1.getAddress().toString().contains(host)) {
+                        String[] complexHost = inetSocketAddress1.getAddress().toString().split("/");
+                        String numericalHost = complexHost[1];
+                        System.out.println(numericalHost);
+                    }
+
+                    //System.out.println(inetSocketAddress1.getAddress());
 
                     ColorsUtils.setColor("cyan");
                     System.out.print("Port: ");
