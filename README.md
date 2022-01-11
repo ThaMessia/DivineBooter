@@ -42,6 +42,17 @@ PRO TIP: If you want the specified Minecraft server to crash instantly, do not u
 
 Run this on a botnet or a VPS and you have your secure Minecraft hacking environment!
 
+------------------------
+
+```diff
+! TODO
+
+@@ THEME SELECTOR @@
+@@ COLORBLIND THEME @@
+@@ LGBT THEME @@
+```
+------------------------
+
 ```diff
 - Made with love and pizza by ThaMessia
 ```
