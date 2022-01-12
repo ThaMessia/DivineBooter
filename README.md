@@ -47,8 +47,8 @@ Run this on a botnet or a VPS and you have your secure Minecraft hacking environ
 ```diff
 ! TODO
 
-@@ THEME SELECTOR @@
-@@ COLORBLIND THEME @@
++ THEME SELECTOR
++ COLORBLIND THEME
 @@ LGBT THEME @@
 ```
 ------------------------

@@ -5,5 +5,8 @@ public class ColorsUtils {
         if (color.equalsIgnoreCase("cyan")) System.out.print("\u001B[36m");
         if (color.equalsIgnoreCase("yellow")) System.out.print("\u001B[33m");
         if (color.equalsIgnoreCase("red")) System.out.print("\u001B[31m");
+        if (color.equalsIgnoreCase("green")) System.out.print("\u001B[32m");
+        if (color.equalsIgnoreCase("blue")) System.out.print("\u001B[34m");
+        if (color.equalsIgnoreCase("purple")) System.out.print("\u001B[35m");
     }
 }
