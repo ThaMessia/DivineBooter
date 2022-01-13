@@ -43,10 +43,10 @@ PRO TIP: If you want the specified Minecraft server to crash instantly, do not u
 Run this on a botnet or a VPS and you have your secure Minecraft hacking environment!
 
 DivineBooter is so customizable that allows you to use whatever theme you want
-as you please. There are currently two themes available: **default** and **colorblind**.
+as you please. There are currently three themes available: **default**, **colorblind** and **LGBT**.
 
 In order to choose a theme you have to create a file named "**divineThemeSelector.txt**" and then type "default"
-if you want to choose **default theme** and "colorblind" if you want to select **colorblind theme**.
+if you want to choose **default theme**, "colorblind" if you want to choose **colorblind theme** and "LGBT" if you want to choose **LGBT** theme.
 
 ------------------------
 
@@ -55,7 +55,7 @@ if you want to choose **default theme** and "colorblind" if you want to select *
 
 + THEME SELECTOR
 + COLORBLIND THEME
-@@ LGBT THEME @@
++ LGBT THEME 
 ```
 ------------------------
 
