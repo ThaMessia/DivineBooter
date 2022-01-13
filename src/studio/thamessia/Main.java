@@ -1556,8 +1556,7 @@ public class Main {
     }
 
     public static void main(String[] args) throws IOException {
-        //loadTheme();
-        lgbtThemeAttackManager();
+        loadTheme();
     }
 
     //protected void finalize() throws IOException, ParseException, InterruptedException {
