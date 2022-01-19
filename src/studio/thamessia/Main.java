@@ -988,54 +988,6 @@ public class Main {
                 }
 
                 if (select.equalsIgnoreCase("attack")) { defaultThemeAttack(); }
-                if (select.equalsIgnoreCase("spy")) {
-                    ColorsUtils.setColor("cyan");
-                    System.out.print("Insert IP: ");
-                    ColorsUtils.setColor("red");
-                    String IP = bufferedReader.readLine();
-
-                    ColorsUtils.setColor("cyan");
-                    System.out.print("Insert port: ");
-                    ColorsUtils.setColor("red");
-                    int port = Integer.parseInt(bufferedReader.readLine());
-
-                    ColorsUtils.setColor("cyan");
-                    System.out.print("Insert name of the spy: ");
-                    ColorsUtils.setColor("red");
-                    String name = bufferedReader.readLine();
-
-                    String serverStatus = StatusManager.serverStatus(IP, port);
-                    JSONParser jsonParser = new JSONParser();
-                    JSONObject jsonObject = (JSONObject) jsonParser.parse(serverStatus);
-
-                    Socket socket = new Socket();
-                    InetSocketAddress inetSocketAddress = new InetSocketAddress(IP, port);
-                    socket.connect(inetSocketAddress);
-
-                    DataOutputStream dataOutputStream = new DataOutputStream(socket.getOutputStream());
-                    DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());
-
-                    JSONObject version = (JSONObject) jsonObject.get("version");
-                    long protocol = (long) version.get("protocol");
-
-                    HandshakePacket handshakePacket = new HandshakePacket((int) protocol, IP, port, NextState.LOGIN);
-                    handshakePacket.sendPacket(dataOutputStream);
-
-                    LoginStart loginStart = new LoginStart(name);
-                    loginStart.sendPacket(dataOutputStream);
-
-                    Thread chatManager = new Thread(() -> {
-                        for (;;) {
-                            try {
-                                int packetResponseManager = DataTypes.readVarInt(dataInputStream);
-                                if (packetResponseManager != Integer.parseInt("FORZA BARI")) return;
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    });
-                    chatManager.start();
-                }
                 if (select.equalsIgnoreCase("obama")) {
                     System.out.println("⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠟⠛⠛⠛⠉⠉⠉⠋⠛⠛⠛⠻⢻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿\n" +
                             "⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡟⠛⠉⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠉⠙⠻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿\n" +
