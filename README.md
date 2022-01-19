@@ -42,20 +42,36 @@ PRO TIP: If you want the specified Minecraft server to crash instantly, do not u
 
 Run this on a botnet or a VPS and you have your secure Minecraft hacking environment!
 
-DivineBooter is so customizable that allows you to use whatever theme you want
-as you please. There are currently three themes available: **default**, **colorblind** and **LGBT**.
+DivineBooter is so customizable that allows you to use insane features:
+
+THEMES: 
+There are currently three themes available: **default**, **colorblind** and **LGBT**.
 
 In order to choose a theme you have to create a file named "**divineThemeSelector.txt**" and then type "default"
 if you want to choose **default theme**, "colorblind" if you want to choose **colorblind theme** and "LGBT" if you want to choose **LGBT** theme.
+
+COMMANDS:
+You can create a command and inject it into DivineBooter. How? Well... very simple.
+You create a file called "**CustomCommandExecutor.java**" and format it like this:
+
+```java
+public class CustomCommandExecutor {
+    public static void execute() {
+      //here you go with your code
+    }
+}
+```
+After this you can type "custom" in DivineBooter and let the software inject the command and run it.
+P.S.: This command is barely supported, if any bugs occur then it's because your code doesn't work!
+
 
 ------------------------
 
 ```diff
 ! TODO
 
-+ THEME SELECTOR
-+ COLORBLIND THEME
-+ LGBT THEME 
+Currently nothing :)
+
 ```
 ------------------------
 
