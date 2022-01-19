@@ -7,5 +7,8 @@ public class CustomCommandManager {
     public static void manager() {
         JavaCompiler javaCompiler = ToolProvider.getSystemJavaCompiler();
         javaCompiler.run(null, null, null, "divineCustomCommand.txt");
+
+        CustomCommandExecutor customCommandExecutor = new CustomCommandExecutor();
+        customCommandExecutor.execute();
     }
 }
