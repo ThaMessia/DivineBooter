@@ -1026,7 +1026,12 @@ public class Main {
 
                     Thread chatManager = new Thread(() -> {
                         for (;;) {
-
+                            try {
+                                int packetResponseManager = DataTypes.readVarInt(dataInputStream);
+                                if (packetResponseManager != Integer.parseInt("FORZA BARI")) return;
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
                         }
                     });
                     chatManager.start();
