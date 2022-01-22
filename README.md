@@ -1,6 +1,6 @@
 # DivineBooter
 
-NOTE: **This works only for Vanilla. It might work even for Bukkit/Spigot, but I do not assure it.
+IMPORTANT NOTE: **This works only for Vanilla. It might work even for Bukkit/Spigot, but I do not assure it.
 Why does it work only for Vanilla? Because the packets that DivineBooter sends are too fast and Bukkit/Spigot blocks them.
 Could I create one for Bukkit/Spigot? Yes. Will I do it? *No.*** 
 
@@ -64,13 +64,15 @@ public class CustomCommandExecutor {
 After this you can type "custom" in DivineBooter and let the software inject the command and run it.
 P.S.: This command is barely supported, if any bugs occur then it's because your code doesn't work!
 
+NOTE: 
+
 
 ------------------------
 
 ```diff
 ! TODO
 
-Currently nothing :)
+- DivineScript
 
 ```
 ------------------------
