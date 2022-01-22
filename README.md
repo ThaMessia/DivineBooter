@@ -72,7 +72,7 @@ NOTE: **Custom commands work only on default theme!**
 ```diff
 ! TODO
 
-- DivineScript
+- HolyC implementation for programming custom commands.
 
 ```
 ------------------------
