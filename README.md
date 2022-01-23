@@ -64,7 +64,7 @@ public class CustomCommandExecutor {
 After this you can type "custom" in DivineBooter and let the software inject the command and run it.
 P.S.: This command is barely supported, if any bugs occur then it's because your code doesn't work!
 
-NOTE: **Custom commands work only on default theme!**
+NOTE: **Custom commands work only on default theme!** (for now)
 
 
 ------------------------
@@ -72,8 +72,9 @@ NOTE: **Custom commands work only on default theme!**
 ```diff
 ! TODO
 
-@@ Creating a new programming language called DivineC @@
-@@ Implementing DivineC in order to create custom commands with it. @@
++ Creating a new programming language called DivineC
++ Implementing DivineC in order to create custom commands with it
+@@ Creating sockets for DivineC @@
 
 ```
 ------------------------
