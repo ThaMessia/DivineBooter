@@ -75,7 +75,7 @@ NOTE: **Custom commands work only on default theme!** (for now)
 + Creating a new programming language called DivineC
 + Implementing DivineC in order to create custom commands with it
 + Creating sockets for DivineC
-@@ Making Minecraft protocol usable from DivineC @@
++ Making Minecraft protocol usable from DivineC
 
 ```
 ------------------------
