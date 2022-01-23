@@ -72,8 +72,9 @@ NOTE: **Custom commands work only on default theme!**
 ```diff
 ! TODO
 
-@@ Creating a new programming language called DivineC @@
-@@ Implementing DivineC in order to create custom commands with it. @@
++ Creating a new programming language called DivineC
++ Implementing DivineC in order to create custom commands with it
+@@ Creating sockets for DivineC @@
 
 ```
 ------------------------
