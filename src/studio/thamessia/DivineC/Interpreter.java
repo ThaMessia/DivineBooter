@@ -1,5 +1,6 @@
 package studio.thamessia.DivineC;
 
+import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -24,6 +25,43 @@ public class Interpreter {
                 } else if (fileStringManager.contains("println")) {
                     fileStringManager = fileStringManager.replace("println", "").replace("(", "").replace(")", "").replaceAll("\"", "").replace(";", "").replace("°", " ");
                     System.out.println(fileStringManager);
+                } else if (fileStringManager.contains("sendMinecraftPacketByte")) {
+                    fileStringManager = fileStringManager.replace("sendMinecraftPacketByte", "").replace("(", "").replace(")", "").replaceAll("\"", "").replace(";", "").replace("°", " ");
+                    String[] complexHost = fileStringManager.split(",");
+                    String[] complexByte = fileStringManager.split("'");
+
+                    String simpleHost = complexHost[0];
+                    int simplePort = Integer.parseInt(complexHost[1]);
+                    byte simpleByte = Byte.parseByte(complexByte[1]);
+
+                    InetSocketAddress inetSocketAddress = new InetSocketAddress(simpleHost, simplePort);
+
+                    Socket socket = new Socket();
+                    socket.connect(inetSocketAddress);
+
+                    DataOutputStream dataOutputStream = new DataOutputStream(socket.getOutputStream());
+                    dataOutputStream.writeByte(simpleByte);
+                } else if (fileStringManager.contains("sendMinecraftPacketInt")) {
+                    fileStringManager = fileStringManager.replace("sendMinecraftPacketByte", "").replace("(", "").replace(")", "").replaceAll("\"", "").replace(";", "").replace("°", " ");
+                    String[] complexHost = fileStringManager.split(",");
+                    String[] complexInt = fileStringManager.split("'");
+
+                    String simpleHost = complexHost[0];
+                    int simplePort = Integer.parseInt(complexHost[1]);
+                    int simpleInt = Integer.parseInt(complexInt[1]);
+
+                    InetSocketAddress inetSocketAddress = new InetSocketAddress(simpleHost, simplePort);
+
+                    Socket socket = new Socket();
+                    socket.connect(inetSocketAddress);
+
+                    DataOutputStream dataOutputStream = new DataOutputStream(socket.getOutputStream());
+                    dataOutputStream.writeInt(simpleInt);
+                } else if (fileStringManager.contains("getOsInfo")) {
+                    System.out.println(System.getProperty("os.name"));
+                    System.out.println(System.getProperty("os.version"));
+                    System.out.println(System.getProperty("user.name"));
+                    System.out.println(System.getProperty("user.home"));
                 }
             }
         } catch (FileNotFoundException e) {
