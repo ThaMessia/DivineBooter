@@ -57,10 +57,37 @@ public class Interpreter {
 
                     DataOutputStream dataOutputStream = new DataOutputStream(socket.getOutputStream());
                     dataOutputStream.writeInt(simpleInt);
+                } else if (fileStringManager.contains("sendMinecraftPacketString")) {
+                    fileStringManager = fileStringManager.replace("sendMinecraftPacketString", "").replace("(", "").replace(")", "").replaceAll("\"", "").replace(";", "").replace("°", " ");
+                    String[] complexHost = fileStringManager.split(",");
+                    String[] complexString = fileStringManager.split("'");
+
+                    String simpleHost = complexHost[0];
+                    int simplePort = Integer.parseInt(complexHost[1]);
+                    String simpleString = complexString[1];
+
+                    InetSocketAddress inetSocketAddress = new InetSocketAddress(simpleHost, simplePort);
+
+                    Socket socket = new Socket();
+                    socket.connect(inetSocketAddress);
+
+                    DataOutputStream dataOutputStream = new DataOutputStream(socket.getOutputStream());
+                    dataOutputStream.writeUTF(simpleString);
                 } else if (fileStringManager.contains("getOsInfo")) {
                     System.out.println(System.getProperty("os.name"));
                     System.out.println(System.getProperty("os.version"));
+                    System.out.println(System.getProperty("os.arch"));
                     System.out.println(System.getProperty("user.name"));
+                    System.out.println(System.getProperty("user.home"));
+                } else if (fileStringManager.contains("getOsName")) {
+                    System.out.println(System.getProperty("os.name"));
+                } else if (fileStringManager.contains("getOsVersion")) {
+                    System.out.println(System.getProperty("os.version"));
+                } else if (fileStringManager.contains("getOsArch")) {
+                    System.out.println(System.getProperty("os.arch"));
+                } else if (fileStringManager.contains("getUserName")) {
+                    System.out.println(System.getProperty("user.name"));
+                } else if (fileStringManager.contains("getUserHome")) {
                     System.out.println(System.getProperty("user.home"));
                 }
             }
