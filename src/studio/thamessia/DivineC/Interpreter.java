@@ -73,6 +73,22 @@ public class Interpreter {
 
                     DataOutputStream dataOutputStream = new DataOutputStream(socket.getOutputStream());
                     dataOutputStream.writeUTF(simpleString);
+                } else if (fileStringManager.contains("sendMinecraftPacketBoolean")) {
+                    fileStringManager = fileStringManager.replace("sendMinecraftPacketString", "").replace("(", "").replace(")", "").replaceAll("\"", "").replace(";", "").replace("°", " ");
+                    String[] complexHost = fileStringManager.split(",");
+                    String[] complexBoolean = fileStringManager.split("'");
+
+                    String simpleHost = complexHost[0];
+                    int simplePort = Integer.parseInt(complexHost[1]);
+                    boolean simpleBoolean = Boolean.parseBoolean(complexBoolean[1]);
+
+                    InetSocketAddress inetSocketAddress = new InetSocketAddress(simpleHost, simplePort);
+
+                    Socket socket = new Socket();
+                    socket.connect(inetSocketAddress);
+
+                    DataOutputStream dataOutputStream = new DataOutputStream(socket.getOutputStream());
+                    dataOutputStream.writeBoolean(simpleBoolean);
                 } else if (fileStringManager.contains("getOsInfo")) {
                     System.out.println(System.getProperty("os.name"));
                     System.out.println(System.getProperty("os.version"));
