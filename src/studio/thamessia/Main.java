@@ -7,6 +7,7 @@ import studio.thamessia.Bypass.*;
 import studio.thamessia.Crashers.ClickWindowPacket;
 import studio.thamessia.Crashers.Mode;
 import studio.thamessia.CustomConjecture.CustomCommandManager;
+import studio.thamessia.DivineC.DivineCommandManager;
 import studio.thamessia.Packets.Handshake.HandshakePacket;
 import studio.thamessia.Packets.Handshake.NextState;
 import studio.thamessia.Packets.Login.LoginStart;
@@ -990,7 +991,7 @@ public class Main {
 
                 if (select.equalsIgnoreCase("attack")) { defaultThemeAttack(); }
                 if (select.equalsIgnoreCase("custom")) { CustomCommandManager.manager(); }
-                if (select.equalsIgnoreCase("divinecustom")) { }
+                if (select.equalsIgnoreCase("divinecustom")) { DivineCommandManager.interpreterManager(); }
                 if (select.equalsIgnoreCase("obama")) {
                     System.out.println("⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠟⠛⠛⠛⠉⠉⠉⠋⠛⠛⠛⠻⢻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿\n" +
                             "⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡟⠛⠉⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠉⠙⠻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿\n" +
