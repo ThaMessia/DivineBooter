@@ -469,37 +469,7 @@ public class Main {
 
                                 InteractEntity interactEntity = new InteractEntity(0, Type.ATTACK, false);
 
-                        /*new Thread(() -> {
-                            try {
-                                for (;;) interactEntity.sendPacket(dataOutputStream);
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
-                        }).start();*/
-
-                                //LoginSuccess loginSuccess = new LoginSuccess();
-                                //loginSuccess.readPacket(dataInputStream);
-
                                 Thread.sleep(200);
-
-//                        ByteArrayOutputStream uncompressedData = new ByteArrayOutputStream();
-//                        DataOutputStream udd_outputStream = new DataOutputStream(uncompressedData);
-//
-//                        DataTypes.writeVarInt(udd_outputStream, 0x03);
-//                        DataTypes.writeString(udd_outputStream, message);
-//
-//                        int dLength = uncompressedData.size();
-//                        byte[] compressedData = CompressionUtils.compress(uncompressedData.toByteArray(), setCompression.getThreshold());
-//
-//                        ByteArrayOutputStream dL = new ByteArrayOutputStream();
-//                        DataOutputStream dLOutputStream = new DataOutputStream(dL);
-//                        DataTypes.writeVarInt(dLOutputStream, dLength);
-//
-//                        int packetLength = dL.size() + compressedData.length;
-//
-//                        DataTypes.writeVarInt(dataOutputStream, packetLength);
-//                        DataTypes.writeVarInt(dataOutputStream, dLength);
-//                        dataOutputStream.write(compressedData);
 
                                 ColorsUtils.setColor("purple");
                                 System.out.println("Sending bots...");
