@@ -42,7 +42,7 @@ public class Interpreter {
                     DataOutputStream dataOutputStream = new DataOutputStream(socket.getOutputStream());
                     dataOutputStream.writeByte(simpleByte);
                 } else if (fileStringManager.contains("sendMinecraftPacketInt")) {
-                    fileStringManager = fileStringManager.replace("sendMinecraftPacketByte", "").replace("(", "").replace(")", "").replaceAll("\"", "").replace(";", "").replace("°", " ");
+                    fileStringManager = fileStringManager.replace("sendMinecraftPacketInt", "").replace("(", "").replace(")", "").replaceAll("\"", "").replace(";", "").replace("°", " ");
                     String[] complexHost = fileStringManager.split(",");
                     String[] complexInt = fileStringManager.split("'");
 
@@ -74,7 +74,7 @@ public class Interpreter {
                     DataOutputStream dataOutputStream = new DataOutputStream(socket.getOutputStream());
                     dataOutputStream.writeUTF(simpleString);
                 } else if (fileStringManager.contains("sendMinecraftPacketBoolean")) {
-                    fileStringManager = fileStringManager.replace("sendMinecraftPacketString", "").replace("(", "").replace(")", "").replaceAll("\"", "").replace(";", "").replace("°", " ");
+                    fileStringManager = fileStringManager.replace("sendMinecraftPacketBoolean", "").replace("(", "").replace(")", "").replaceAll("\"", "").replace(";", "").replace("°", " ");
                     String[] complexHost = fileStringManager.split(",");
                     String[] complexBoolean = fileStringManager.split("'");
 
@@ -89,6 +89,22 @@ public class Interpreter {
 
                     DataOutputStream dataOutputStream = new DataOutputStream(socket.getOutputStream());
                     dataOutputStream.writeBoolean(simpleBoolean);
+                } else if (fileStringManager.equalsIgnoreCase("sendMinecraftPacketDouble")) {
+                    fileStringManager = fileStringManager.replace("sendMinecraftPacketDouble", "").replace("(", "").replace(")", "").replaceAll("\"", "").replace(";", "").replace("°", " ");
+                    String[] complexHost = fileStringManager.split(",");
+                    String[] complexDouble = fileStringManager.split("'"); //if you came here to share hate I remind you that
+                                                                                 //double stands for "double the precision as float"
+                    String simpleHost = complexHost[0];
+                    int simplePort = Integer.parseInt(complexHost[1]);
+                    double simpleDouble = Double.parseDouble(complexDouble[1]);
+
+                    InetSocketAddress inetSocketAddress = new InetSocketAddress(simpleHost, simplePort);
+
+                    Socket socket = new Socket();
+                    socket.connect(inetSocketAddress);
+
+                    DataOutputStream dataOutputStream = new DataOutputStream(socket.getOutputStream());
+                    dataOutputStream.writeDouble(simpleDouble);
                 } else if (fileStringManager.contains("getOsInfo")) {
                     System.out.println(System.getProperty("os.name"));
                     System.out.println(System.getProperty("os.version"));
