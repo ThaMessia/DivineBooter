@@ -774,38 +774,7 @@ public class Main {
 
                                 InteractEntity interactEntity = new InteractEntity(0, Type.ATTACK, false);
 
-                        /*new Thread(() -> {
-                            try {
-                                for (;;) interactEntity.sendPacket(dataOutputStream);
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
-                        }).start();*/
-
-                                //LoginSuccess loginSuccess = new LoginSuccess();
-                                //loginSuccess.readPacket(dataInputStream);
-
                                 Thread.sleep(200);
-
-//                        ByteArrayOutputStream uncompressedData = new ByteArrayOutputStream();
-//                        DataOutputStream udd_outputStream = new DataOutputStream(uncompressedData);
-//
-//                        DataTypes.writeVarInt(udd_outputStream, 0x03);
-//                        DataTypes.writeString(udd_outputStream, message);
-//
-//                        int dLength = uncompressedData.size();
-//                        byte[] compressedData = CompressionUtils.compress(uncompressedData.toByteArray(), setCompression.getThreshold());
-//
-//                        ByteArrayOutputStream dL = new ByteArrayOutputStream();
-//                        DataOutputStream dLOutputStream = new DataOutputStream(dL);
-//                        DataTypes.writeVarInt(dLOutputStream, dLength);
-//
-//                        int packetLength = dL.size() + compressedData.length;
-//
-//                        DataTypes.writeVarInt(dataOutputStream, packetLength);
-//                        DataTypes.writeVarInt(dataOutputStream, dLength);
-//                        dataOutputStream.write(compressedData);
-
                                 lgbtThemeParseManager("Sending bots...");
 
                                 Thread.sleep(350);
@@ -856,10 +825,6 @@ public class Main {
                             LoginStart loginStart = new LoginStart("404_" + new Random().nextInt(5000) + "");
                             loginStart.sendPacket(dataOutputStream);
 
-                            //checkPremium(dataInputStream, dataOutputStream, (int) protocol, IP, port);
-
-                            //ClientSettingsBypass clientSettingsBypass = new ClientSettingsBypass("it_IT", (byte) 1, ChatMode.HIDDEN, false, (byte) 0x08, MainHand.RIGHT, true, false);
-                            //clientSettingsBypass.sendPacket(dataOutputStream);
                             try {
                                 SetCompression setCompression = new SetCompression().readPacket(dataInputStream);
 
@@ -885,38 +850,7 @@ public class Main {
                                 lgbtThemeParseManager("[DivineError] Trying to bypass whitelist...");
                             }
 
-                        /*new Thread(() -> {
-                            try {
-                                for (;;) interactEntity.sendPacket(dataOutputStream);
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
-                        }).start();*/
-
-                            //LoginSuccess loginSuccess = new LoginSuccess();
-                            //loginSuccess.readPacket(dataInputStream);
-
                             Thread.sleep(200);
-
-//                        ByteArrayOutputStream uncompressedData = new ByteArrayOutputStream();
-//                        DataOutputStream udd_outputStream = new DataOutputStream(uncompressedData);
-//
-//                        DataTypes.writeVarInt(udd_outputStream, 0x03);
-//                        DataTypes.writeString(udd_outputStream, message);
-//
-//                        int dLength = uncompressedData.size();
-//                        byte[] compressedData = CompressionUtils.compress(uncompressedData.toByteArray(), setCompression.getThreshold());
-//
-//                        ByteArrayOutputStream dL = new ByteArrayOutputStream();
-//                        DataOutputStream dLOutputStream = new DataOutputStream(dL);
-//                        DataTypes.writeVarInt(dLOutputStream, dLength);
-//
-//                        int packetLength = dL.size() + compressedData.length;
-//
-//                        DataTypes.writeVarInt(dataOutputStream, packetLength);
-//                        DataTypes.writeVarInt(dataOutputStream, dLength);
-//                        dataOutputStream.write(compressedData);
-
                             lgbtThemeParseManager("Sending bots...");
 
                             Thread.sleep(350);
@@ -1565,10 +1499,4 @@ public class Main {
     public static void main(String[] args) throws IOException {
         loadTheme();
     }
-
-    //protected void finalize() throws IOException, ParseException, InterruptedException {
-    //System.err.println("Emergency mode activated!");
-    //System.out.println("Booting program...");
-    //executeAttack();
-    //}
 }
