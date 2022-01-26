@@ -1,5 +1,7 @@
 # DivineBooter
 
+## Intro
+
 IMPORTANT NOTE: **This works only for Vanilla. It might work even for Bukkit/Spigot, but I do not assure it.
 Why does it work only for Vanilla? Because the packets that DivineBooter sends are too fast and Bukkit/Spigot blocks them.
 Could I create one for Bukkit/Spigot? Yes. Will I do it? *No.*** 
@@ -17,6 +19,20 @@ Why should you choose DivineBooter over other booters?
 7): Italian quality.
 ```
 
+## Starting
+
+------------------------
+
+How to start the program? Very simple.
+Type the following command in the terminal located in the same directory of the .jar file:
+```
+java -jar DivineBooter.jar
+```
+
+------------------------
+
+## Attacking
+
 Let's see how can we perform an attack using DivineBooter. 
 First of all, after opening it, we should see an interface like this:
 ```css
@@ -30,6 +46,11 @@ As the attack starts, you will see something like this:
 ```yml
 Sending bots...
 ```
+
+------------------------
+
+### Proxying
+
 How to use proxies? Using proxies is as easy as seducing a 12 year old guy: if you have big and sexy tits you get him.
 Now, to use proxies you must type "y" when in the attack section the program asks you this:
 
@@ -41,6 +62,10 @@ In order to actually use proxies you have to create a file called "proxiesFile.t
 PRO TIP: If you want the specified Minecraft server to crash instantly, do not use proxies, as they are of course slower than your IPs. Use proxies only if you want anonymity! 
 
 Run this on a botnet or a VPS and you have your secure Minecraft hacking environment!
+
+------------------------
+
+### Customization
 
 DivineBooter is so customizable that allows you to use insane features:
 
