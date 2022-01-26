@@ -99,9 +99,6 @@ public class Main {
                         String simpleHost = complexHost[0];
                         int simplePort = Integer.parseInt(complexHost[1]);
 
-                        //if (proxiesList.isEmpty()) System.err.println("No proxy found in the file! Exiting..."); System.exit(0);
-                        //if (!proxiesList.get(0).contains(":")) System.err.println("No valid proxy found in the file! Exiting..."); System.exit(0);
-
                         Proxy proxy = new Proxy(Proxy.Type.SOCKS, new InetSocketAddress(simpleHost, simplePort));
 
                         socket = new Socket(proxy);
