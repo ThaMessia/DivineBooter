@@ -4,7 +4,7 @@
 
 IMPORTANT NOTE: **This works only for Vanilla. It might work even for Bukkit/Spigot, but I do not assure it.
 Why does it work only for Vanilla? Because the packets that DivineBooter sends are too fast and Bukkit/Spigot blocks them.
-Could I create one for Bukkit/Spigot? Yes. Will I do it? *No.*** 
+Could I create a booter for Bukkit/Spigot? Yes. Will I do it? *No.*** 
 
 
 DivineBooter is a special type of tool that attacks Minecraft servers sending packets and bots.
