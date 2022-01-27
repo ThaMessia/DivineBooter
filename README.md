@@ -102,6 +102,7 @@ NOTE: **Custom commands work only on default theme!** (for now)
 + Creating sockets for DivineC
 + Making Minecraft protocol usable from DivineC
 + Making basical data types to be sent through sockets, especially for Minecraft protocol
+@@ Creating a documentation for DivineC @@
 
 ```
 ------------------------
