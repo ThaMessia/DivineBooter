@@ -853,7 +853,9 @@ public class Main {
                     System.out.println("\nHelp: displays this page.");
                     System.out.println("Proxychecker: checks if proxies (without port because it checks the host) are working.");
                     System.out.println("Getinfo: gets info about a minecraft server.");
-                    System.out.println("Attack: attacks.\n");
+                    System.out.println("Attack: attacks.");
+                    System.out.println("Custom: custom command written in Java.");
+                    System.out.println("Divinecustom: divine custom command written in DivineC.\n");
                 } else if (select.equalsIgnoreCase("getinfo")) {
                     String host = new String();
                     int port;
