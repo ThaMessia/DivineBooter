@@ -6,9 +6,13 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.Socket;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class Interpreter {
+    private static Map<String, Object> variablesManager = new HashMap<>();
+
     protected static void interpret(String fileName) {
         try {
             File file = new File(fileName);
@@ -20,11 +24,28 @@ public class Interpreter {
                 fileStringManager = scanner.next();
 
                 if (fileStringManager.contains("printf")) {
-                    fileStringManager = fileStringManager.replace("printf", "").replace("(", "").replace(")", "").replaceAll("\"", "").replace(";", "").replace("°", " ");
-                    System.out.print(fileStringManager);
+                    if (!fileStringManager.contains("\"")) {
+                        fileStringManager = fileStringManager.replace("printf", "").replace("(", "").replace(")", "").replace(";", "");
+                        System.out.print(variablesManager.get(fileStringManager));
+                    } else {
+                        fileStringManager = fileStringManager.replace("printf", "").replace("(", "").replace(")", "").replaceAll("\"", "").replace(";", "").replace("°", " ");
+                        System.out.print(fileStringManager);
+                    }
                 } else if (fileStringManager.contains("println")) {
-                    fileStringManager = fileStringManager.replace("println", "").replace("(", "").replace(")", "").replaceAll("\"", "").replace(";", "").replace("°", " ");
-                    System.out.println(fileStringManager);
+                    if (!fileStringManager.contains("\"")) {
+                        fileStringManager = fileStringManager.replace("println", "").replace("(", "").replace(")", "").replace(";", "");
+                        System.out.println(variablesManager.get(fileStringManager));
+                    } else {
+                        fileStringManager = fileStringManager.replace("println", "").replace("(", "").replace(")", "").replaceAll("\"", "").replace(";", "").replace("°", " ");
+                        System.out.println(fileStringManager);
+                    }
+                } else if (fileStringManager.contains("var")) {
+                    String[] variableManager = fileStringManager.split("°");
+
+                    String variableName = variableManager[1];
+                    String variableValue = variableManager[2].replace("\"", "").replace(";", "");
+
+                    variablesManager.put(variableName, variableValue);
                 } else if (fileStringManager.contains("sendMinecraftPacketByte")) {
                     fileStringManager = fileStringManager.replace("sendMinecraftPacketByte", "").replace("(", "").replace(")", "").replaceAll("\"", "").replace(";", "").replace("°", " ");
                     String[] complexHost = fileStringManager.split(",");
