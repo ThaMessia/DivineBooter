@@ -1,7 +1,10 @@
+/*
+THE FOLLOWING CODE TAKES LIFE THANKS TO THAMESSIA IN DECEMBER 2021.
+*/
 package studio.thamessia.Utils;
 
 public class VersionIDUtils {
-    //CODICE ALIENO COSI' NON SKIDDATE
+    //Good luck trying to understand it
     public static int getClientBoundKeepAliveID(int pv) {
         return pv >= 47 && pv < 67 ? 0x00 : pv >= 67 && pv < 80 ? 0x1F : pv >= 80 && pv < 86 ? 0x20 : pv >= 86 && pv < 318 ? 0x1F : pv >= 318 && pv < 332 ? 0x20 :
                 pv >= 332 && pv < 345 ? 0x1F : pv >= 345 && pv < 389 ? 0x20 : pv >= 389 && pv < 471 ?

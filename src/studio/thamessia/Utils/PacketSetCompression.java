@@ -1,3 +1,6 @@
+/*
+THE FOLLOWING CODE TAKES LIFE THANKS TO THAMESSIA IN OCTOBER 2021.
+*/
 package studio.thamessia.Utils;
 
 import studio.thamessia.Packets.Packet;

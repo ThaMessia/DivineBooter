@@ -1,3 +1,6 @@
+/*
+THE FOLLOWING CODE TAKES LIFE THANKS TO THAMESSIA IN SEPTEMBER 2021.
+*/
 package studio.thamessia.Utils;
 
 import java.io.DataInputStream;

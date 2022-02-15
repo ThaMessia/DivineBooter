@@ -1,3 +1,6 @@
+/*
+THE FOLLOWING CODE TAKES LIFE THANKS TO THAMESSIA IN JANUARY 2022.
+*/
 package studio.thamessia.DivineC;
 
 import studio.thamessia.Utils.ColorsUtils;

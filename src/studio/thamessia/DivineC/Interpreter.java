@@ -1,3 +1,13 @@
+/*
+THE FOLLOWING CODE TAKES LIFE THANKS TO THAMESSIA IN JANUARY 2022.
+
+NOTE: Many of you know that I usually don't document code, and sometimes I
+      make it unreadable on purpose, but a friend explicitly requested me to
+      document it, therefore here it is.
+
+      The following code can be shared and distributed as long as it's clearly
+      said that it's my code.
+*/
 package studio.thamessia.DivineC;
 
 import java.io.DataOutputStream;
