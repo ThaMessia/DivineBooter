@@ -11,58 +11,63 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class Interpreter {
-    private static Map<String, Object> variablesManager = new HashMap<>();
+    private static Map<String, Object> variablesManager = new HashMap<>(); //hashmap that will be used to store variables
 
     protected static void interpret(String fileName) {
+        // WARNING: use "°" for spaces instead of " "
+
         try {
-            File file = new File(fileName);
-            Scanner scanner = new Scanner(file);
-            String fileStringManager = null;
+            File file = new File(fileName); //file declaration
+            Scanner scanner = new Scanner(file); //scanner for reading from file
+            String fileStringManager = null; //string manager to assign file values
             //String commandManager = null;
 
-            while (scanner.hasNext()) {
-                fileStringManager = scanner.next();
+            while (scanner.hasNext()) { //reading the file until the end
+                fileStringManager = scanner.next(); //reads every line
 
-                if (fileStringManager.contains("printf")) {
-                    if (!fileStringManager.contains("\"")) {
+                if (fileStringManager.contains("printf")) { //if the line contains printf... so basically printf("");
+                    if (!fileStringManager.contains("\"")) { //if it's a variable
+                        //remove 'printf(variable);' so it becomes 'variable'
                         fileStringManager = fileStringManager.replace("printf", "").replace("(", "").replace(")", "").replace(";", "");
-                        System.out.print(variablesManager.get(fileStringManager));
-                    } else {
+                        System.out.print(variablesManager.get(fileStringManager)); //prints the value of the variable
+                    } else { //if it's just printing a message
+                        //remove 'printf("Hello, World!");' so it just is 'Hello, World!' that will be printed
                         fileStringManager = fileStringManager.replace("printf", "").replace("(", "").replace(")", "").replaceAll("\"", "").replace(";", "").replace("°", " ");
-                        System.out.print(fileStringManager);
+                        System.out.print(fileStringManager); //prints the value of the printf. 'Example: printf("Hello, World")' will be 'Hello, World!'
                     }
-                } else if (fileStringManager.contains("println")) {
-                    if (!fileStringManager.contains("\"")) {
+                } else if (fileStringManager.contains("println")) { //same thing here
+                    if (!fileStringManager.contains("\"")) { //if it's a variable
                         fileStringManager = fileStringManager.replace("println", "").replace("(", "").replace(")", "").replace(";", "");
                         System.out.println(variablesManager.get(fileStringManager));
-                    } else {
+                    } else { //if it's not
                         fileStringManager = fileStringManager.replace("println", "").replace("(", "").replace(")", "").replaceAll("\"", "").replace(";", "").replace("°", " ");
                         System.out.println(fileStringManager);
                     }
-                } else if (fileStringManager.contains("var")) {
-                    String[] variableManager = fileStringManager.split("°");
+                } else if (fileStringManager.contains("var")) { //if it's something like 'var pippo "ciao";'
+                    String[] variableManager = fileStringManager.split("°"); //splits through the spaces in order to get both the name of variable and the value
 
-                    String variableName = variableManager[1];
-                    String variableValue = variableManager[2].replace("\"", "").replace(";", "");
+                    String variableName = variableManager[1]; //gets the second element that is the name of the variable
+                    String variableValue = variableManager[2].replace("\"", "").replace(";", ""); //gets the third element that is the value of variable
 
-                    variablesManager.put(variableName, variableValue);
-                } else if (fileStringManager.contains("sendMinecraftPacketByte")) {
+                    variablesManager.put(variableName, variableValue); //puts both the name and the value of the variable in the variables hashmap
+                } else if (fileStringManager.contains("sendMinecraftPacketByte")) { //syntax would be the following:
+                    // sendMinecraftPacketByte(host,port'bytetosend);
                     fileStringManager = fileStringManager.replace("sendMinecraftPacketByte", "").replace("(", "").replace(")", "").replaceAll("\"", "").replace(";", "").replace("°", " ");
                     String[] complexHost = fileStringManager.split(",");
                     String[] complexByte = fileStringManager.split("'");
 
-                    String simpleHost = complexHost[0];
-                    int simplePort = Integer.parseInt(complexHost[1]);
-                    byte simpleByte = Byte.parseByte(complexByte[1]);
+                    String simpleHost = complexHost[0]; //gets the name of host
+                    int simplePort = Integer.parseInt(complexHost[1]); //gets the port of host
+                    byte simpleByte = Byte.parseByte(complexByte[1]); //gets the byte to send
 
-                    InetSocketAddress inetSocketAddress = new InetSocketAddress(simpleHost, simplePort);
+                    InetSocketAddress inetSocketAddress = new InetSocketAddress(simpleHost, simplePort); //creates the address
 
-                    Socket socket = new Socket();
-                    socket.connect(inetSocketAddress);
+                    Socket socket = new Socket(); //creates the socket
+                    socket.connect(inetSocketAddress); //connects the socket
 
                     DataOutputStream dataOutputStream = new DataOutputStream(socket.getOutputStream());
-                    dataOutputStream.writeByte(simpleByte);
-                } else if (fileStringManager.contains("sendMinecraftPacketInt")) {
+                    dataOutputStream.writeByte(simpleByte); //sends the byte to the server
+                } else if (fileStringManager.contains("sendMinecraftPacketInt")) { //IT'S THE SAME FROM NOW ON
                     fileStringManager = fileStringManager.replace("sendMinecraftPacketInt", "").replace("(", "").replace(")", "").replaceAll("\"", "").replace(";", "").replace("°", " ");
                     String[] complexHost = fileStringManager.split(",");
                     String[] complexInt = fileStringManager.split("'");
@@ -126,7 +131,7 @@ public class Interpreter {
 
                     DataOutputStream dataOutputStream = new DataOutputStream(socket.getOutputStream());
                     dataOutputStream.writeDouble(simpleDouble);
-                } else if (fileStringManager.contains("getOsInfo")) {
+                } else if (fileStringManager.contains("getOsInfo")) { //pretty obvious
                     System.out.println(System.getProperty("os.name"));
                     System.out.println(System.getProperty("os.version"));
                     System.out.println(System.getProperty("os.arch"));
