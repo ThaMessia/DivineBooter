@@ -10,10 +10,7 @@ NOTE: Many of you know that I usually don't document code, and sometimes I
 */
 package studio.thamessia.DivineC;
 
-import java.io.DataOutputStream;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.util.HashMap;
@@ -60,6 +57,13 @@ public class Interpreter {
                     String variableValue = variableManager[2].replace("\"", "").replace(";", ""); //gets the third element that is the value of variable
 
                     variablesManager.put(variableName, variableValue); //puts both the name and the value of the variable in the variables hashmap
+                } else if (fileStringManager.contains("input")) { //if it's something like 'input(variable)' saves the variable 'variable' as a variable and its value is what the user inputted
+                    String inputVariableName = fileStringManager.replace("input", "").replace(";", "").replace("(", "").replace(")", "");
+
+                    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+                    String inputVariableValue = bufferedReader.readLine();
+
+                    variablesManager.put(inputVariableName, inputVariableValue);
                 } else if (fileStringManager.contains("sendMinecraftPacketByte")) { //syntax would be the following:
                     // sendMinecraftPacketByte(host,port'bytetosend);
                     fileStringManager = fileStringManager.replace("sendMinecraftPacketByte", "").replace("(", "").replace(")", "").replaceAll("\"", "").replace(";", "").replace("°", " ");
