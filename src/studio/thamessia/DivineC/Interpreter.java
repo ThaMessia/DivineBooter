@@ -101,11 +101,10 @@ public class Interpreter {
                     // sendMinecraftPacketByte(host,port'bytetosend);
                     fileStringManager = fileStringManager.replace("sendMinecraftPacketByte", "").replace("(", "").replace(")", "").replaceAll("\"", "").replace(";", "").replace("°", " ");
                     String[] complexHost = fileStringManager.split(",");
-                    String[] complexByte = fileStringManager.split("'");
 
                     String simpleHost = complexHost[0]; //gets the name of host
                     int simplePort = Integer.parseInt(complexHost[1]); //gets the port of host
-                    byte simpleByte = Byte.parseByte(complexByte[1]); //gets the byte to send
+                    byte simpleByte = Byte.parseByte(complexHost[2]); //gets the byte to send
 
                     InetSocketAddress inetSocketAddress = new InetSocketAddress(simpleHost, simplePort); //creates the address
 
@@ -117,11 +116,10 @@ public class Interpreter {
                 } else if (fileStringManager.contains("sendMinecraftPacketInt")) { //IT'S THE SAME FROM NOW ON
                     fileStringManager = fileStringManager.replace("sendMinecraftPacketInt", "").replace("(", "").replace(")", "").replaceAll("\"", "").replace(";", "").replace("°", " ");
                     String[] complexHost = fileStringManager.split(",");
-                    String[] complexInt = fileStringManager.split("'");
 
                     String simpleHost = complexHost[0];
                     int simplePort = Integer.parseInt(complexHost[1]);
-                    int simpleInt = Integer.parseInt(complexInt[1]);
+                    int simpleInt = Integer.parseInt(complexHost[2]);
 
                     InetSocketAddress inetSocketAddress = new InetSocketAddress(simpleHost, simplePort);
 
@@ -133,11 +131,10 @@ public class Interpreter {
                 } else if (fileStringManager.contains("sendMinecraftPacketString")) {
                     fileStringManager = fileStringManager.replace("sendMinecraftPacketString", "").replace("(", "").replace(")", "").replaceAll("\"", "").replace(";", "").replace("°", " ");
                     String[] complexHost = fileStringManager.split(",");
-                    String[] complexString = fileStringManager.split("'");
 
                     String simpleHost = complexHost[0];
                     int simplePort = Integer.parseInt(complexHost[1]);
-                    String simpleString = complexString[1];
+                    String simpleString = complexHost[2];
 
                     InetSocketAddress inetSocketAddress = new InetSocketAddress(simpleHost, simplePort);
 
@@ -149,11 +146,10 @@ public class Interpreter {
                 } else if (fileStringManager.contains("sendMinecraftPacketBoolean")) {
                     fileStringManager = fileStringManager.replace("sendMinecraftPacketBoolean", "").replace("(", "").replace(")", "").replaceAll("\"", "").replace(";", "").replace("°", " ");
                     String[] complexHost = fileStringManager.split(",");
-                    String[] complexBoolean = fileStringManager.split("'");
 
                     String simpleHost = complexHost[0];
                     int simplePort = Integer.parseInt(complexHost[1]);
-                    boolean simpleBoolean = Boolean.parseBoolean(complexBoolean[1]);
+                    boolean simpleBoolean = Boolean.parseBoolean(complexHost[2]);
 
                     InetSocketAddress inetSocketAddress = new InetSocketAddress(simpleHost, simplePort);
 
@@ -165,11 +161,10 @@ public class Interpreter {
                 } else if (fileStringManager.equalsIgnoreCase("sendMinecraftPacketDouble")) {
                     fileStringManager = fileStringManager.replace("sendMinecraftPacketDouble", "").replace("(", "").replace(")", "").replaceAll("\"", "").replace(";", "").replace("°", " ");
                     String[] complexHost = fileStringManager.split(",");
-                    String[] complexDouble = fileStringManager.split("'"); //if you came here to share hate I remind you that
-                                                                                 //double stands for "double the precision as float"
+                     //if you came here to share hate I remind you that double stands for "double the precision as float"
                     String simpleHost = complexHost[0];
                     int simplePort = Integer.parseInt(complexHost[1]);
-                    double simpleDouble = Double.parseDouble(complexDouble[1]);
+                    double simpleDouble = Double.parseDouble(complexHost[2]);
 
                     InetSocketAddress inetSocketAddress = new InetSocketAddress(simpleHost, simplePort);
 
