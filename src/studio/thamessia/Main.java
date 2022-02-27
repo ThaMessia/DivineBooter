@@ -875,6 +875,7 @@ public class Main {
                     System.out.println("");
 
                     String serverStatus = StatusManager.serverStatus(host, port);
+                    //System.out.println(serverStatus);
                     JSONParser jsonParser = new JSONParser();
                     JSONObject jsonObject = (JSONObject) jsonParser.parse(serverStatus);
 

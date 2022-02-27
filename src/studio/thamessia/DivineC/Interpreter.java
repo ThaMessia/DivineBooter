@@ -10,6 +10,9 @@ NOTE: Many of you know that I usually don't document code, and sometimes I
 */
 package studio.thamessia.DivineC;
 
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
+import javax.script.ScriptException;
 import java.io.*;
 import java.net.InetSocketAddress;
 import java.net.Socket;
@@ -64,6 +67,36 @@ public class Interpreter {
                     String inputVariableValue = bufferedReader.readLine();
 
                     variablesManager.put(inputVariableName, inputVariableValue);
+                } else if (fileStringManager.contains("if")) { //conditions
+                    // if (true); if (false) return true false;
+                    String[] extractCondition = fileStringManager.split(":");
+
+                    fileStringManager = extractCondition[0].replace("if", "").replace("(", "").replace(")", "");
+
+                    ScriptEngineManager factory = new ScriptEngineManager();
+                    ScriptEngine engine = factory.getEngineByName("JavaScript");
+
+                    Boolean conditionResult = (Boolean) engine.eval(fileStringManager);
+
+                    if (conditionResult) {
+                        //WHO KNOWS
+                    }
+                } else if (fileStringManager.contains("system")) { //executes system's language (batch, bash...)
+                    String cmd = fileStringManager.replace("system", "").replace("(", "").replace(")", "").replace(";", "").replace("\"", "").replace("°", " ").replace("'", "\n");
+                    Process process = Runtime.getRuntime().exec(cmd);
+
+                    String processStringManager1 = "";
+                    String processStringManager2 = "";
+
+                    StringBuilder stringBuilder = new StringBuilder();
+
+                    BufferedReader inputManager = new BufferedReader(new InputStreamReader(process.getInputStream()));
+                    BufferedReader customManager = new BufferedReader(new InputStreamReader(process.getErrorStream()));
+
+                    while ((processStringManager1 = inputManager.readLine()) != null) stringBuilder.append(processStringManager1);
+                    while ((processStringManager2 = customManager.readLine()) != null) stringBuilder.append(processStringManager2);
+
+                    System.out.println(stringBuilder);
                 } else if (fileStringManager.contains("sendMinecraftPacketByte")) { //syntax would be the following:
                     // sendMinecraftPacketByte(host,port'bytetosend);
                     fileStringManager = fileStringManager.replace("sendMinecraftPacketByte", "").replace("(", "").replace(")", "").replaceAll("\"", "").replace(";", "").replace("°", " ");
@@ -166,6 +199,8 @@ public class Interpreter {
         } catch (FileNotFoundException e) {
             System.err.println("File not found!");
         } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ScriptException e) {
             e.printStackTrace();
         }
     }
