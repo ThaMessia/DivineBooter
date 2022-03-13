@@ -189,6 +189,27 @@ public class Interpreter {
                     System.out.println(System.getProperty("user.name"));
                 } else if (fileStringManager.contains("getUserHome")) {
                     System.out.println(System.getProperty("user.home"));
+                } else if (fileStringManager.contains("writeFile")) {
+                    fileStringManager = fileStringManager.replace("writeFile", "").replace("(", "").replace(")", "").replace(";", "").replace("\"", "");
+                    String[] rawData = fileStringManager.split(",");
+
+                    String stringToWrite = rawData[0];
+                    String fileNameManager = rawData[1];
+
+                    File file1 = new File(fileNameManager);
+                    FileWriter fileWriter = new FileWriter(file1);
+
+                    fileWriter.write(stringToWrite);
+                    fileWriter.close();
+                } else if (fileStringManager.contains("readAllFile")) {
+                    String fileNameManager = fileStringManager.replace("readAllFile", "").replace("(", "").replace(")", "").replace(";", "");
+
+                    File file1 = new File(fileNameManager);
+                    Scanner fileReader = new Scanner(new FileReader(file1));
+
+                    String stringFileManager = "";
+                    while (fileReader.hasNext()) stringFileManager = fileReader.next(); System.out.println(stringFileManager);
+                    fileReader.close();
                 }
             }
         } catch (FileNotFoundException e) {
