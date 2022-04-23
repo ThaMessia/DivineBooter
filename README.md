@@ -23,6 +23,8 @@ Why should you choose DivineBooter over other booters?
 
 ------------------------
 
+:1
+
 How to start the program? Very simple.
 Type the following command in the terminal located in the same directory of the .jar file:
 ```
@@ -31,6 +33,8 @@ java -jar DivineBooter.jar
 
 But first, we need to install Java. BUT FIRST, WHAT IS JAVA? Java is a programming language that has been used by Notch to destroy
 programmers' lives by creating Minecraft. To install Java just install Java. To start the program... bottom text. **Enjoy!**
+
+goto 1
 
 ------------------------
 
