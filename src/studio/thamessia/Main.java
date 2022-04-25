@@ -803,6 +803,7 @@ public class Main {
                     e.printStackTrace();
                 }
 
+                if (select.equalsIgnoreCase("divineframework")) { ExploitFramework.openFramework(); }
                 if (select.equalsIgnoreCase("attack")) { defaultThemeAttack(); }
                 if (select.equalsIgnoreCase("custom")) { CustomCommandManager.manager(); }
                 if (select.equalsIgnoreCase("divinecustom")) { DivineCommandManager.interpreterManager(); }
