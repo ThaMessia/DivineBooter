@@ -1,3 +1,6 @@
+/*
+THE FOLLOWING CODE TAKES LIFE THANKS TO THAMESSIA IN OCTOBER 2022.
+*/
 package studio.thamessia.Utils;
 
 public class DivineDoc {
