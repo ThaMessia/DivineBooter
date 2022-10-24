@@ -18,10 +18,7 @@ import studio.thamessia.Packets.Login.SetCompression;
 import studio.thamessia.Packets.Serverbound.InteractEntity;
 import studio.thamessia.Packets.Serverbound.Type;
 import studio.thamessia.Packets.Status.StatusManager;
-import studio.thamessia.Utils.ColorsUtils;
-import studio.thamessia.Utils.DataTypes;
-import studio.thamessia.Utils.GameStateOutput;
-import studio.thamessia.Utils.PacketSetCompression;
+import studio.thamessia.Utils.*;
 
 import java.awt.event.KeyListener;
 import java.io.*;
@@ -1282,7 +1279,7 @@ public class Main {
 
     }
 
-    private static void loadTheme() throws IOException {
+    private static void loadTheme() throws IOException, InterruptedException {
         File file = new File("divineThemeSelector.txt");
         if (!file.exists()) defaultThemeAttackManager();
 
@@ -1293,6 +1290,7 @@ public class Main {
             if (fileManager.equalsIgnoreCase("default")) defaultThemeAttackManager();
             else if (fileManager.equalsIgnoreCase("colorblind")) colorblindThemeAttackManager();
             else if (fileManager.equalsIgnoreCase("lgbt")) lgbtThemeAttackManager();
+            else if (fileManager.equalsIgnoreCase("loadDoc")) DivineDoc.showDocumentation();
             else {
                 System.out.println("No valid theme found! Loading default theme...");
                 defaultThemeAttackManager();
@@ -1379,7 +1377,7 @@ public class Main {
         System.out.print(stringBuilder);
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, InterruptedException {
         loadTheme();
     }
 }

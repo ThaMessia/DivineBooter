@@ -81,6 +81,7 @@ There are currently three themes available: **default**, **colorblind** and **LG
 
 In order to choose a theme you have to create a file named "**divineThemeSelector.txt**" and then type "default"
 if you want to choose **default theme**, "colorblind" if you want to choose **colorblind theme** and "LGBT" if you want to choose **LGBT** theme.
+**NOTE: by putting "loadDoc" in the file you can load the DivineC documentation.**
 
 COMMANDS:
 You can create a command and inject it into DivineBooter. How? Well... very simple.
@@ -109,7 +110,7 @@ NOTE: **Custom commands work only on default theme!** (for now)
 + Creating sockets for DivineC
 + Making Minecraft protocol usable from DivineC
 + Making basical data types to be sent through sockets, especially for Minecraft protocol
-@@ Creating a documentation for DivineC @@
++ Creating a documentation for DivineC 
 
 ```
 ------------------------
